@@ -55,6 +55,9 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "cstring": "cpp"
+        "cstring": "cpp",
+        "fstream": "cpp",
+        "codecvt": "cpp",
+        "ratio": "cpp"
     }
 }

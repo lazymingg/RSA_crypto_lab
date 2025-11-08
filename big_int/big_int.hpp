@@ -10,9 +10,10 @@
 
 class BigInt
 {
-private:
+
+    public:
     uint32_t data[64] = {0}; // 64 * 32 = 2048 bits
-public:
+    
     BigInt()
     {
         std::memset(data, 0, sizeof(data));
@@ -37,6 +38,16 @@ public:
         }
         return result;
     }
+
+    bool is_zero() const
+    {
+        for (size_t i = 0; i < 64; ++i)
+            if (data[i] != 0)
+                return false;
+        return true;
+    }
+
+    bool is_odd() const { return (data[0] & 1U) != 0; }
 
     BigInt &operator+=(const BigInt &other)
     {
@@ -288,5 +299,9 @@ public:
         return true;
     }
 
-    bool operator!=(const BigInt &other) const { return !(*this == other); }
+    std::string to_string() const {
+        std::ostringstream oss;
+        oss << std::hex << *this;
+        return oss.str();
+    }
 };

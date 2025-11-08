@@ -31,7 +31,7 @@ BigInt modInverse(const BigInt &a, const BigInt &b)
     BigInt val_gcd = extended_gcd(a, b, x, y);
 
     if(val_gcd != BigInt(1)){
-        return BigInt(-1);
+        return BigInt(0);
     }
 
     x = (x + b) % b;
@@ -88,11 +88,20 @@ int main(int argc, char* argv[])
     cout << p_num << endl;
     cout << q_num << endl;
     cout << e_num << endl;
-    
-    string output = genKey(p_num, q_num, e_num).to_string();
-    // cout << output << endl;
-    reverse(output.begin(), output.end());
 
-    cout << output << endl;
+    BigInt d = genKey(p_num, q_num, e_num);
+    if(d == BigInt(0))
+    {
+        string output = "-1";
+        cout << output << endl;
+    }
+    else 
+    {
+        string output = d.to_string();
+        // cout << output << endl;
+        reverse(output.begin(), output.end());
+
+        cout << output << endl;
+    }
     return 0;
 }

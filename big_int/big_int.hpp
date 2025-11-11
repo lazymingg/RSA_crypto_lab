@@ -299,9 +299,51 @@ class BigInt
         return true;
     }
 
+    bool operator!=(const BigInt &other) const
+    {
+        return !(*this == other);
+    }
+
     std::string to_string() const {
         std::ostringstream oss;
         oss << std::hex << *this;
         return oss.str();
+    }
+
+    int getHighestBit(uint32_t val) const {
+        int idx = -1;
+
+        while (val) {
+            ++idx;
+            val >>= 1;
+        }
+
+        return idx;
+    }
+
+    int getBitLen() const {
+        int idx;
+
+        for (idx = 63; idx >= 0; idx--) {
+            if (this->data[idx] != 0) {
+                break;
+            }
+        }
+
+        if (idx < 0) {
+            return 0;
+        }
+
+        int pos = this->getHighestBit(this->data[idx]);
+
+        return idx * 32 + pos + 1;
+    }
+
+    bool getBit(int idx) const {
+        if (idx < 0 || idx > 2047) {
+            return false;
+        }
+
+        return (this->data[idx / 32] >> (idx % 32)) & 1U;
     }
 };

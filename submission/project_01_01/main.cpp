@@ -62,6 +62,11 @@ bool millerRabin(BigInt n, int k = 10) {
     for (int i = 0; i < k; i++) {
         BigInt a = BigInt::randomBase(n);
 
+        // a in [2, n - 2]
+        if (a >= n - BigInt(2)) {
+            a = BigInt(2);   
+        }
+
         BigInt x = powerMod(a, m, n);
         
         // a^m % n == +- 1

@@ -299,6 +299,11 @@ class BigInt
         return true;
     }
 
+    bool operator!=(const BigInt &other) const
+    {
+        return !(*this == other);
+    }
+
     std::string to_string() const {
         std::ostringstream oss;
         oss << std::hex << *this;
